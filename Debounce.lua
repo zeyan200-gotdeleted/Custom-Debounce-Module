@@ -1,7 +1,7 @@
 local Debounce = {}; Debounce.__index = Debounce
 
 export type Debounce = {
-	new: ( cooldown: number ) -> ({_cooldown : number, _lastCall : {}}) 
+	new: ( cooldown: number ) -> ( table )--({_cooldown : number, _lastCall : {}}) 
     Check: ( Key: string ) -> ( boolean ),
     Reset: ( Key: string ) -> ( ),
     Clear: ( Key: string ) -> ( ),
