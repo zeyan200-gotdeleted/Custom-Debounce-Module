@@ -1,5 +1,15 @@
 local Debounce = {}; Debounce.__index = Debounce
 
+export type Debounce = {
+	new: ( cooldown: number ) -> ({_cooldown : number, _lastCall : {}}) 
+    Check: ( Key: string ) -> ( boolean ),
+    Reset: ( Key: string ) -> ( ),
+    Clear: ( Key: string ) -> ( ),
+    GetRemaining: ( Key: string ) -> ( number ),
+
+	
+}
+
 function Debounce.new(cooldown: number)
 	assert(typeof(cooldown) == "number" and cooldown > 0, "Cooldown must be a positive number")
 
@@ -29,7 +39,7 @@ function Debounce:Clear()
 	self._lastCall = {}
 end
 
-function Debounce:GetRemaining(key: any): number
+function Debounce:(key: any): number
 	local lastTime = self._lastCall[key]
 	if not lastTime then
 		return 0
@@ -38,4 +48,4 @@ function Debounce:GetRemaining(key: any): number
 	return math.max(0, remaining)
 end
 
-return Debounce
+return Debounce :: Debounce
