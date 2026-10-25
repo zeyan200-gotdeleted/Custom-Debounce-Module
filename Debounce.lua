@@ -1,11 +1,17 @@
 local Debounce = {}; Debounce.__index = Debounce
 
 export type Debounce = {
-	new: ( cooldown: number ) -> ({_cooldown : number, _lastCall : {}}),
-	Check: ( Key: string ) -> ( boolean ),
-	Reset: ( Key: string ) -> ( ),
-	Clear: ( Key: string ) -> ( ),
-	GetRemaining: ( Key: string ) -> ( number ),
+	_cooldown : number, 
+	_lastCall : {},
+	
+	Check: ( self: Debounce, Key: string ) -> ( boolean ),
+	Reset: ( self: Debounce, Key: string ) -> ( ),
+	Clear: ( self: Debounce, Key: string ) -> ( ),
+	GetRemaining: ( self: Debounce, Key: string ) -> ( number ),
+}
+
+export type DebounceModule = {
+	new: ( cooldown: number ) -> (Debounce),
 }
 
 function Debounce.new(cooldown: number)
@@ -46,4 +52,4 @@ function Debounce:GetRemaining(key: any): number
 	return math.max(0, remaining)
 end
 
-return Debounce :: Debounce
+return Debounce :: DebounceModule
